@@ -22,6 +22,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import org.cishell.app.parameter.ParameterService;
 import org.cishell.app.service.datamanager.DataManagerService;
 import org.cishell.framework.CIShellContext;
 import org.cishell.framework.CIShellContextDelegate;
@@ -66,6 +67,15 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 	protected Converter[][] converters;
 	protected ProgressMonitor progressMonitor;
 	protected Algorithm algorithm;
+	protected Dictionary<String, Object> parameters;
+
+	public Dictionary<String, Object> getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(Dictionary<String, Object> parameters) {
+		this.parameters = parameters;
+	}
 
 	public AlgorithmWrapper(
 			ServiceReference serviceReference,
@@ -134,15 +144,17 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 				return null;
 			}
 			
-			Dictionary<String, Object> parameters =
+			 parameters =
 				getUserEnteredParameters(metatypePID, provider);
 
 			// Check to see if the user canceled the operation.
 			if (parameters == null) {
 				return null;
 			}
-
+             
 			printParameters(metatypePID, provider, parameters);
+			storeParameters(provider, parameters);
+
 
 			// Create the algorithm.
 			algorithm = createAlgorithm(
@@ -387,6 +399,7 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 			Activator.getService(MetaTypeService.class.getName());
 		if (metaTypeService != null) {
 			provider = metaTypeService.getMetaTypeInformation(this.serviceReference.getBundle());
+			
 		}
 
 		if ((factory instanceof ParameterMutator) && (provider != null)) {
@@ -640,6 +653,20 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 		} else {
 			return null;
 		}
+	}
+	
+	private void storeParameters(MetaTypeProvider provider, Dictionary<String, Object> parameters)
+	{
+		
+				System.out.println("Started storing Algorithm name is");	
+				ParameterService paramService = (ParameterService)
+						Activator.getService(ParameterService.class.getName());
+             if(paramService != null)
+             {
+         		System.out.println("service is not null");
+             }
+		System.out.println(paramService.getName());
+	
 	}
 
 	public void setProgressMonitor(ProgressMonitor monitor) {
