@@ -173,7 +173,7 @@ public class AlgorithmAction extends Action implements AlgorithmProperty, DataMa
             for (int ii = 0; ii < inData.length; ii++) {
                 for (int jj = 0; jj < dataSet.size(); jj++) {
                     Data datum = (Data) dataSet.get(jj);
-                    
+                    System.out.println("datum = "+datum+"indata ="+inData[ii]);
                     if (datum != null) {
                         if (isAssignableFrom(inData[ii], datum)) {
                             dataSet.remove(jj);

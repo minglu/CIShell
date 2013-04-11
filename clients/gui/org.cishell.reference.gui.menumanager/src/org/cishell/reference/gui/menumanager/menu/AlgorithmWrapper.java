@@ -153,7 +153,7 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 			}
              
 			printParameters(metatypePID, provider, parameters);
-			storeParameters(provider, parameters);
+			//storeParameters(provider, parameters);
 
 
 			// Create the algorithm.

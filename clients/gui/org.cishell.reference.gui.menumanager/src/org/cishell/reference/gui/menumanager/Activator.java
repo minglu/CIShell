@@ -37,7 +37,8 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 	private static Activator plugin;
 	private static BundleContext bundleContext;
 
-    @SuppressWarnings("unused")
+    
+	@SuppressWarnings("unused")
     private MenuAdapter menuAdapter;
 
 	public Activator() {
@@ -113,7 +114,17 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 
     public void earlyStartup() {
     }
+    
+    public static BundleContext getBundleContext() {
+		return bundleContext;
+	}
 
+	public static void setBundleContext(BundleContext bundleContext) {
+		Activator.bundleContext = bundleContext;
+	}
+
+    
+    
     private static Properties getProperties() {
     	Properties brandBundleProperties = new Properties();
 
@@ -156,4 +167,6 @@ public class Activator extends AbstractUIPlugin implements IStartup {
     		return DEFAULT_TOOL_TICKET_URL;
     	}
     }
+    
+    
 }
