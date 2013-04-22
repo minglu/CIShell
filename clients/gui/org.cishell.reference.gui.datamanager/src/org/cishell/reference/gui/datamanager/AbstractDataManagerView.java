@@ -357,6 +357,30 @@ public abstract class AbstractDataManagerView
 	 */
 	public void setFocus() {
 		this.viewer.getControl().setFocus();
+		this.viewer.refresh();
+		AbstractDataManagerView.this.logger.log(
+				LogService.LOG_INFO, "set focus is called",new Exception());
+		
+		
+		for(Map.Entry<Data, DataGUIItem> entry:dataToDataGUIItem.entrySet())
+		{
+		 final DataGUIItem item = entry.getValue();
+		 guiRun(new Runnable() {
+			public void run() {
+				if (!tree.isDisposed()) {
+					// update the TreeView
+					AbstractDataManagerView.this.viewer.refresh();
+					AbstractDataManagerView.this.viewer.expandToLevel(item, 0);
+					 Data model = item.getModel();
+			            String label = (String) model.getMetadata().get(DataProperty.LABEL);
+					
+					AbstractDataManagerView.this.logger.log(
+							LogService.LOG_INFO, "expanding to "+label,new Exception());
+				}
+			}
+		});
+		}
+		
 	}
 
 	public void dataAdded(final Data newData, String label) {
