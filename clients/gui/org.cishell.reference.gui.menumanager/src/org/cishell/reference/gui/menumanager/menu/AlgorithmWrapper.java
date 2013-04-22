@@ -22,7 +22,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import org.cishell.app.parameter.ParameterService;
+
 import org.cishell.app.service.datamanager.DataManagerService;
 import org.cishell.framework.CIShellContext;
 import org.cishell.framework.CIShellContextDelegate;
@@ -655,19 +655,19 @@ public class AlgorithmWrapper implements Algorithm, AlgorithmProperty, ProgressT
 		}
 	}
 	
-	private void storeParameters(MetaTypeProvider provider, Dictionary<String, Object> parameters)
-	{
-		
-				System.out.println("Started storing Algorithm name is");	
-				ParameterService paramService = (ParameterService)
-						Activator.getService(ParameterService.class.getName());
-             if(paramService != null)
-             {
-         		System.out.println("service is not null");
-             }
-		System.out.println(paramService.getName());
-	
-	}
+//	private void storeParameters(MetaTypeProvider provider, Dictionary<String, Object> parameters)
+//	{
+//		
+//				System.out.println("Started storing Algorithm name is");	
+//				//ParameterService paramService = (ParameterService)
+//						Activator.getService(ParameterService.class.getName());
+//             if(paramService != null)
+//             {
+//         		System.out.println("service is not null");
+//             }
+//		System.out.println(paramService.getName());
+//	
+//	}
 
 	public void setProgressMonitor(ProgressMonitor monitor) {
 		progressMonitor = monitor;
